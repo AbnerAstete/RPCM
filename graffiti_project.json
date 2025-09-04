@@ -1,0 +1,1279 @@
+{
+  "entities": [
+    {
+    "typeName": "User",
+    "guid": "-101",
+    "attributes": {
+      "description": "Senior Researcher",
+      "email": "carlos.perez@example.com",
+      "role": "Manager",
+      "qualifiedName": "carlos.perez@LaboratorioA"
+      }
+    },
+    {
+      "typeName": "User",
+      "guid": "-102",
+      "attributes": {
+        "description": "Junior Researcher",
+        "email": "ana.ruiz@example.com",
+        "role": "Analyst",
+        "qualifiedName": "ana.ruiz@LaboratorioA"
+      }
+    },
+    {
+      "typeName": "User",
+      "guid": "-103",
+      "attributes": {
+        "description": "Technician",
+        "email": "juan.lopez@example.com",
+        "role": "ML-processing",
+        "qualifiedName": "juan.lopez@LaboratorioA"
+      }
+    },
+    {
+      "typeName": "Workgroup",
+      "guid": "-105",
+      "attributes": {
+        "description": "Graffiti Research Team - Curation and classification of images",
+        "qualifiedName": "ggm@LaboratorioA",
+        "experiment": { "guid": "-110", "typeName": "Experiment" },
+        "users": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ]
+      }
+    },
+    {
+      "typeName": "Project",
+      "guid": "-100",
+      "attributes": {
+        "description": "Project to discover political messages in graffiti",
+        "location": "Montevideo - Uruguay",
+        "keywords": ["urban art", "graffiti", "social expression"],
+        "createdBy": { "guid": "-101", "typeName": "User" },
+        "startDate": 1735689600000,
+        "endDate": 1735689600000,
+        "qualifiedName": "graffiti-project@LaboratorioA"
+      },
+      "relationshipAttributes": {
+        "experiments": [{ "guid": "-110", "typeName": "Experiment" }]
+      }
+    },
+    {
+      "typeName": "Experiment",
+      "guid": "-110",
+      "attributes": {
+        "description": "Analyze political messages in graffiti",
+        "qualifiedName": "exp_graffiti@LaboratorioA",
+        "project": { "guid": "-100" },
+        "workgroup": [{ "guid": "-105" }]
+      },
+      "relationshipAttributes": {
+        "stages": [{ "guid": "-111", "typeName": "Stage" }]
+      }
+    },
+    {
+      "typeName": "Stage",
+      "guid": "-111",
+      "attributes": {
+        "description": "Problem Statement",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "status": "Active",
+        "qualifiedName": "problemStatement@LaboratorioA",
+        "experiment": { "guid": "-110" }
+      },
+      "relationshipAttributes": {
+        "iterations": [{ "guid": "-112", "typeName": "Iteration" }]
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-112",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_iteration_01@LaboratorioA",
+        "stage": { "guid": "-111" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-113",
+      "attributes": {
+        "name": "Define Research Questions",
+        "description": "Define Research Questions",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_01@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-112" },
+        "inputData": "Literature Review",
+        "outputData": "Hypothesis Document",
+
+
+        "outputs": [{ "guid": "-114" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-114",
+    "attributes": {
+      "name": "Research Questions",
+      "qualifiedName": "/data/problemStatement_usedData_01@LaboratorioA",
+      "description": "First version of Research Questions.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "research_questions.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/research_questions.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-116",
+      "attributes": {
+        "name": "Define List of criteria",
+        "description": "Define List of criteria",
+        "timestamp": 1735689600000,
+        "start":1735689600000 ,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_02@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-112" },
+        "inputData": "Theorical Framework",
+        "outputData": "List of criteria",
+
+
+        "outputs": [{ "guid": "-117" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-117",
+    "attributes": {
+      "name": "List of Criteria",
+      "qualifiedName": "/data/problemStatement_usedData_02@LaboratorioA",
+      "description": "First version of List of Criteria.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "list_criteria.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/list_criteria.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-118",
+      "attributes": {
+        "name": "Select geographical study area",
+        "description": "Select geographical study area",
+        "timestamp": 1735689600000 ,
+        "start":1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_03@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-112" },
+        "inputData": "List of criteria",
+        "outputData": "Observation Zones",
+
+        "inputs": [{ "guid": "-117" }],
+        "outputs": [{ "guid": "-119" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-119",
+    "attributes": {
+      "name": "Geographical study area",
+      "qualifiedName": "/data/problemStatement_usedData_03@LaboratorioA",
+      "description": "First version of geographical study area.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "geographical_area.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/geographical_area.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-120",
+      "attributes": {
+        "name": "Assing roles and responsibilities",
+        "description": "Assing roles and responsibilities",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_04@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-112" },
+        "inputData": "Objetives and List of criteria",
+        "outputData": "Task and Role list",
+
+        "inputs": [{ "guid": "-114" },{ "guid": "-117" }],
+        "outputs": [{ "guid": "-121" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-121",
+    "attributes": {
+      "name": "Roles and responsabilities",
+      "qualifiedName": "/data/problemStatement_usedData_05@LaboratorioA",
+      "description": "First version of roles and responsabilities.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "roles_responsabilities.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/roles_responsabilities.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-122",
+      "attributes": {
+        "name": "Define Problem Statement",
+        "description": "Create the Problem Statement",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_05@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-112" },
+        "inputData": "Hypotesis, List of criteria, Observation Zones and Role list",
+        "outputData": "Problem Statement",
+
+        "inputs": [{ "guid": "-114" },{ "guid": "-117" },{ "guid": "-119" },{ "guid": "-121" }],
+        "outputs": [{ "guid": "-123" },{ "guid": "-124" },{ "guid": "-125" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-123",
+    "attributes": {
+      "name": "Problem Statement v1",
+      "qualifiedName": "/data/problemStatement_usedData_06@LaboratorioA",
+      "description": "First version of the Problem Statement.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "problem_statement.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/problem_statement.pdf"
+    }
+  },
+    {
+    "typeName": "UsedData",
+    "guid": "-124",
+    "attributes": {
+      "name": "Problem Statement v2",
+      "qualifiedName": "/data/problemStatement_usedData_06.2@LaboratorioA",
+      "description": "Second version of Problem Statement.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "problem_statement_2.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/problem_statement_2.pdf"
+    }
+  },
+    {
+    "typeName": "UsedData",
+    "guid": "-125",
+    "attributes": {
+      "name": "Problem Statement v3",
+      "qualifiedName": "/data/problemStatement_usedData_06.3@LaboratorioA",
+      "description": "Third version of Problem Statement.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "problem_statement_3.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/problem_statement_3.pdf"
+    }
+  },
+    {
+      "typeName": "Consensus",
+      "guid": "-115",
+      "attributes": {
+        "description": "Validation of the Problem Statement",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 40,
+        "timestamp": 1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "consenso_problem_statement_1@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " 15 Comments and debate on the definition of political graffiti and criteria",
+        "result": "rejected",
+        "action": { "guid": "-122", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-126",
+      "attributes": {
+        "timestamp":1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_iteration_02@LaboratorioA",
+        "stage": { "guid": "-111" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-127",
+      "attributes": {
+        "name": "Define Research Questions - Iteration 2",
+        "description": "Define Research Questions - Iteration 2",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_01.2@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-126" },
+        "inputData": "Literature Review and Research Question v1",
+        "outputData": "Hypothesis Document",
+
+        "inputs": [{ "guid": "-114" }],
+        "outputs": [{ "guid": "-128" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-128",
+    "attributes": {
+      "name": "Research Questions v2",
+      "qualifiedName": "/data/problemStatement_usedData_01.2@LaboratorioA",
+      "description": "Second version of Research Questions.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "research_questions_v2.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/research_questions_v2.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-129",
+      "attributes": {
+        "name": "Define Problem Statement - Iteration 2",
+        "description": "Define Problem Statement - Iteration 2",
+        "timestamp": 1735689600000,
+        "start":1735689600000 ,
+        "end": 1735689600000,
+        "qualifiedName": "problemStatement_action_05.2@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-126" },
+        "inputData": "Hypotesis v2, List of criteria, Observation Zones and Role list",
+        "outputData": "Problem Statement",
+
+        "inputs": [{ "guid": "-128" },{ "guid": "-117" },{ "guid": "-119" },{ "guid": "-121" }],
+        "outputs": [{ "guid": "-130" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-130",
+    "attributes": {
+      "name": "Problem Statement v4",
+      "qualifiedName": "/data/problemStatement_usedData_06.4@LaboratorioA",
+      "description": "Quarter version of Problem Statement.",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "problem_statement_4.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/problem_statement_4.pdf"
+    }
+  },
+    {
+      "typeName": "Consensus",
+      "guid": "-131",
+      "attributes": {
+        "description": "Validation of the Problem Statement",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 90,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "consenso_problem_statement_2@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " 15 Comments and debate on the definition of political graffiti and criteria",
+        "result": "rejected",
+        "action": { "guid": "-129", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Stage",
+      "guid": "-132",
+      "attributes": {
+        "description": "Data acquisition",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "status": "Active",
+        "qualifiedName": "dataAdquisition@LaboratorioA",
+        "experiment": { "guid": "-110" }
+      },
+      "relationshipAttributes": {
+        "iterations": [{ "guid": "-133", "typeName": "Iteration" }]
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-133",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_iteration_01@LaboratorioA",
+        "stage": { "guid": "-132" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-134",
+      "attributes": {
+        "name": "Collect Images",
+        "description": "Collect geo-referenced images",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_action_01@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-133" },
+        "inputData": "Define area, camera, GPS",
+        "outputData": "Bunch of images",
+
+        "inputs":[{ "guid": "-119" }],
+        "outputs": [{ "guid": "-135" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-135",
+    "attributes": {
+      "name": "Bunch of photos - 350 - v1",
+      "qualifiedName": "/data/dataAdquisition_usedData_01@LaboratorioA",
+      "description": "Photos taken in the selected areas",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "graffiti_photos_v1.csv",
+      "format": "csv",
+      "size": 2048,
+      "path": "/data/graffiti_photos_v1.csv"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-136",
+      "attributes": {
+        "name": "Interwies",
+        "description": "Conduct Interviews and collect comments",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_action_02@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-133" },
+        "inputData": "Text/Audio",
+        "outputData": "Document with transcriptions",
+
+        "outputs": [{ "guid": "-137" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-137",
+    "attributes": {
+      "name": "Interview Responses",
+      "qualifiedName": "/data/dataAdquisition_usedData_02@LaboratorioA",
+      "description": "Transcription of the Interview",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "interview.pdf",
+      "format": "PDF",
+      "size": 350,
+      "path": "/data/interview.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-138",
+      "attributes": {
+        "name": "Apply inclusion/exclusion criteria",
+        "description": "Apply inclusion/exclusion criteria to the photos taken",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_action_03@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-133" },
+        "inputData": "Transcriptions and photos",
+        "outputData": "Selected Photos",
+
+        "inputs": [{ "guid": "-135" },{"guid":"-137"}],
+        "outputs": [{ "guid": "-139" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-139",
+    "attributes": {
+      "name": "Photos after criteria v1",
+      "qualifiedName": "/data/dataAdquisition_usedData_03@LaboratorioA",
+      "description": "Transcription of the Interview - 180 -v1",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "photos_after_criteria_v1.csv",
+      "format": "csv",
+      "size": 180,
+      "path": "/data/photos_after_criteria_v1.csv"
+    }
+  },
+    {
+      "typeName": "Consensus",
+      "guid": "-140",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 50,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_01@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Insufficient photo content",
+        "result": "rejected",
+        "action": { "guid": "-138", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-141",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_iteration_02@LaboratorioA",
+        "stage": { "guid": "-132" }
+      }
+    },{
+      "typeName": "Action",
+      "guid": "-142",
+      "attributes": {
+        "name": "Collect Images - Iteration 2",
+        "description": "Collect geo-referenced images",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_action_04@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-141" },
+        "inputData": "Define area, camera, GPS and photos taken in the first iteration",
+        "outputData": "Bunch of photos",
+
+        "inputs":[{ "guid": "-119"},{ "guid": "-135"}],
+        "outputs": [{ "guid": "-143" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-143",
+    "attributes": {
+      "name": "Bunch of photos - 1050 - v2",
+      "qualifiedName": "/data/dataAdquisition_usedData_05@LaboratorioA",
+      "description": "Photos taken in the selected areas",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "graffiti_photos_v2.csv",
+      "format": "csv",
+      "size": 2048,
+      "path": "/data/graffiti_photos_v2.csv"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-144",
+      "attributes": {
+        "name": "Apply inclusion/exclusion criteria - Iteration 2",
+        "description": "Apply inclusion/exclusion criteria to the photos taken",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_action_05@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-141" },
+        "inputData": "Bunch of photos v2, Transcriptions and Inclusion and exclusion criteria for the bunch of photos v1",
+        "outputData": "Selected Photos",
+
+        "inputs": [{ "guid": "-143" },{"guid":"-137"},{"guid":"-139"}],
+        "outputs": [{ "guid": "-145" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-145",
+    "attributes": {
+      "name": "Photos after criteria v2",
+      "qualifiedName": "/data/dataAdquisition_usedData_06@LaboratorioA",
+      "description": "Transcription of the Interview - 546",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "photos_after_criteria_v2.csv",
+      "format": "csv",
+      "size": 180,
+      "path": "/data/photos_after_criteria_v2.csv"
+    }
+  },
+  {
+      "typeName": "Consensus",
+      "guid": "-146",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_02@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated final dataset",
+        "result": "approved",
+        "action": { "guid": "-144", "typeName": "Action" }
+      }
+    },
+
+
+
+    {
+      "typeName": "Stage",
+      "guid": "-148",
+      "attributes": {
+        "description": "Data Management",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "status": "Active",
+        "qualifiedName": "dataManagement@LaboratorioA",
+        "experiment": { "guid": "-110" }
+      },
+      "relationshipAttributes": {
+        "iterations": [{ "guid": "-149", "typeName": "Iteration" }]
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-149",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataManagement_iteration_01@LaboratorioA",
+        "stage": { "guid": "-148" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-150",
+      "attributes": {
+        "name": "Qualitative tagging",
+        "description": "Manual Qualitative tagging of Photos",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataManagement_action_01@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-102", "typeName": "User" }],
+        "iteration": { "guid": "-149" },
+        "inputData": "546 Validated Photos",
+        "outputData": "Tags: Marginality, anonymity",
+
+        "inputs":[{ "guid": "-145" }],
+        "outputs": [{ "guid": "-151" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-151",
+    "attributes": {
+      "name": "Photos with qualitative tags",
+      "qualifiedName": "/data/dataManagement_usedData_01@LaboratorioA",
+      "description": "Photos with Tags",
+
+      "producer": { "guid": "-102", "typeName": "User" },
+      "document": "graffiti_photos_qualitative_tag.csv",
+      "format": "csv",
+      "size": 2048,
+      "path": "/data/graffiti_photos_qualitative_tag.csv"
+    }
+  },
+  {
+      "typeName": "Consensus",
+      "guid": "-154",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 85,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_01@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated",
+        "result": "approved",
+        "action": { "guid": "-150", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-152",
+      "attributes": {
+        "name": "ML Quantitative tagging",
+        "description": "ML Qualitative tagging of Photos - Kmeans and herarchical clustering",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataManagement_action_02@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-103", "typeName": "User" }],
+        "iteration": { "guid": "-149" },
+        "inputData": "546 Validated Photos",
+        "outputData": "Tags: cubism, pop art",
+
+        "inputs":[{ "guid": "-145" }],
+        "outputs": [{ "guid": "-153" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-153",
+    "attributes": {
+      "name": "Photos with Quantitative Tags",
+      "qualifiedName": "/data/dataManagement_usedData_02@LaboratorioA",
+      "description": "Photos with Quantitative Tags",
+
+      "producer": { "guid": "-103", "typeName": "User" },
+      "document": "graffiti_photos_quantitative_tag.csv",
+      "format": "csv",
+      "size": 2048,
+      "path": "/data/graffiti_photos_quantitative_tag.csv"
+    }
+  },
+  {
+      "typeName": "Consensus",
+      "guid": "-155",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Pairwise Review",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_02@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Senior reviewed ML classification",
+        "result": "approved",
+        "action": { "guid": "-152", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-157",
+      "attributes": {
+        "name": "Data versioning and repository creation",
+        "description": "Data versioning and repository creation",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataManagement_action_03@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-103", "typeName": "User" }],
+        "iteration": { "guid": "-149" },
+        "inputData": "Photos,Interviews,tags",
+        "outputData": "Repository",
+
+        "inputs":[{ "guid": "-145" },{ "guid": "-137" },{ "guid": "-151" },{ "guid": "-153" }],
+        "outputs": [{ "guid": "-158" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-158",
+    "attributes": {
+      "name": "Repository",
+      "qualifiedName": "/data/dataManagement_usedData_03@LaboratorioA",
+      "description": "Repository with Photos, Quantitative and Qualitative Tags",
+
+      "producer": { "guid": "-103", "typeName": "User" },
+      "document": "",
+      "format": "",
+      "size": 2048,
+      "path": ""
+    }
+  },
+  {
+      "typeName": "Consensus",
+      "guid": "-156",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Supervision",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_03@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated and maintained by Senior",
+        "result": "approved",
+        "action": { "guid": "-157", "typeName": "Action" }
+      }
+    },
+
+
+    {
+      "typeName": "Stage",
+      "guid": "-159",
+      "attributes": {
+        "description": "Analysis",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "status": "Active",
+        "qualifiedName": "analysis@LaboratorioA",
+        "experiment": { "guid": "-110" }
+      },
+      "relationshipAttributes": {
+        "iterations": [{ "guid": "-160", "typeName": "Iteration" }]
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-160",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "analysis_iteration_01@LaboratorioA",
+        "stage": { "guid": "-159" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-161",
+      "attributes": {
+        "name": "Initial result analysis from tagging",
+        "description": "Initial result analysis from tagging",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "analisys_action_01@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-103", "typeName": "User" }],
+        "iteration": { "guid": "-160" },
+        "inputData": " Qualitative tags and Quantitative tags",
+        "outputData": "Discution points",
+
+        "inputs":[{ "guid": "-151" },{ "guid": "-153" }],
+        "outputs": [{ "guid": "-162" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-162",
+    "attributes": {
+      "name": "Discution Points",
+      "qualifiedName": "/data/analysis_usedData_01@LaboratorioA",
+      "description": "Repository with Photos, Quantitative and Qualitative Tags",
+
+      "producer": { "guid": "-103", "typeName": "User" },
+      "document": "tags_discution_points.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/tags_discution_points.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-163",
+      "attributes": {
+        "name": "Compare manual vs ML tags in dataframes",
+        "description": "Compare manual vs ML tags in dataframes",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "analisys_action_02@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-103", "typeName": "User" }],
+        "iteration": { "guid": "-160" },
+        "inputData": " Qualitative tags, Quantitative tags, discution points",
+        "outputData": "Report on changes",
+
+        "inputs":[{ "guid": "-151" },{ "guid": "-153" },{ "guid": "-162" }],
+        "outputs": [{ "guid": "-164" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-164",
+    "attributes": {
+      "name": "Report on changes",
+      "qualifiedName": "/data/analysis_usedData_02@LaboratorioA",
+      "description": "Compare manual vs ML tags in dataframes",
+
+      "producer": { "guid": "-103", "typeName": "User" },
+      "document": "report_on_changes.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/report_on_changes.pdf"
+    }
+  },
+    {
+      "typeName": "Action",
+      "guid": "-165",
+      "attributes": {
+        "name": "Synthesize manual and ML result into narrative",
+        "description": "Synthesize manual and ML result into narrative",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "analisys_action_03@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-103", "typeName": "User" }],
+        "iteration": { "guid": "-160" },
+        "inputData": " Qualitative tags, Quantitative tags, discution points",
+        "outputData": "Final interpretive narrative",
+
+        "inputs":[{ "guid": "-151" },{ "guid": "-153" },{ "guid": "-164" }],
+        "outputs": [{ "guid": "-166" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-166",
+    "attributes": {
+      "name": "Narrative",
+      "qualifiedName": "/data/analysis_usedData_03@LaboratorioA",
+      "description": "Final interpretive narrative",
+
+      "producer": { "guid": "-103", "typeName": "User" },
+      "document": "narrative.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/narrative.pdf"
+    }
+  },
+  { 
+      "typeName": "Consensus",
+      "guid": "-167",
+      "attributes": {
+        "description": "",
+        "typeConsensus": "Team Consensus",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "dataAdquisition_consenso_03@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated synthesis",
+        "result": "approved",
+        "action": { "guid": "-165", "typeName": "Action" }
+      }
+    },
+
+
+    {
+      "typeName": "Stage",
+      "guid": "-168",
+      "attributes": {
+        "description": "Reporting",
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "status": "Active",
+        "qualifiedName": "reporting@LaboratorioA",
+        "experiment": { "guid": "-110" }
+      },
+      "relationshipAttributes": {
+        "iterations": [{ "guid": "-169", "typeName": "Iteration" }]
+      }
+    },
+    {
+      "typeName": "Iteration",
+      "guid": "-169",
+      "attributes": {
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_iteration_01@LaboratorioA",
+        "stage": { "guid": "-159" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-170",
+      "attributes": {
+        "name": "Create visualizations",
+        "description": "Visualizations",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_action_01@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-169" },
+        "inputData": "Analyzed Data",
+        "outputData": "Charts,graphs, visual",
+
+        "inputs":[{ "guid": "-166" }],
+        "outputs": [{ "guid": "-171" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-171",
+    "attributes": {
+      "name": "Visualizations",
+      "qualifiedName": "/data/reporting_usedData_01@LaboratorioA",
+      "description": "Visualizations ( graph generation, map rendering )",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "visualization.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/visualization.pdf"
+    }
+  },{ 
+      "typeName": "Consensus",
+      "guid": "-176",
+      "attributes": {
+        "description": "Expert Check",
+        "typeConsensus": "Team Consensus",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_consenso_01@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated graphics and maps",
+        "result": "approved",
+        "action": { "guid": "-170", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-172",
+      "attributes": {
+        "name": "Write final report",
+        "description": "Write final report",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_action_02@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-169" },
+        "inputData": "Analysis and visualizations",
+        "outputData": "Document with conclusions",
+
+        "inputs":[{ "guid": "-166" },{ "guid": "-171" }],
+        "outputs": [{ "guid": "-173" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-173",
+    "attributes": {
+      "name": "Final research Report",
+      "qualifiedName": "/data/reporting_usedData_02@LaboratorioA",
+      "description": "Final interpretive narrative",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "final_report.pdf",
+      "format": "PDF",
+      "size": 2048,
+      "path": "/data/final_report.pdf"
+    }
+  },{ 
+      "typeName": "Consensus",
+      "guid": "-177",
+      "attributes": {
+        "description": "Validated final document",
+        "typeConsensus": "Team Consensus",
+        "agreementLevel": 95,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_consenso_01@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Validated synthesis",
+        "result": "approved",
+        "action": { "guid": "-172", "typeName": "Action" }
+      }
+    },
+    {
+      "typeName": "Action",
+      "guid": "-174",
+      "attributes": {
+        "name": "Validated changes",
+        "description": "Update version control system",
+        "timestamp":1735689600000 ,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_action_03@LaboratorioA",
+
+
+        "status": "Completed",
+        "madeBy": [{ "guid": "-101", "typeName": "User" }],
+        "iteration": { "guid": "-169" },
+        "inputData": "Validated changes and comments",
+        "outputData": "Update version control system",
+
+        "inputs":[{ "guid": "-173" },{ "guid": "-158" }],
+        "outputs": [{ "guid": "-175" }]
+      }
+    },
+    {
+    "typeName": "UsedData",
+    "guid": "-175",
+    "attributes": {
+      "name": "Changes validated",
+      "qualifiedName": "/data/reporting_usedData_03@LaboratorioA",
+      "description": "Update version control system",
+
+      "producer": { "guid": "-101", "typeName": "User" },
+      "document": "",
+      "format": "",
+      "size": 2048,
+      "path": ""
+    }
+  },{ 
+      "typeName": "Consensus",
+      "guid": "-178",
+      "attributes": {
+        "description": "Supervision",
+        "typeConsensus": "Team Consensus",
+        "agreementLevel": 100,
+        "timestamp": 1735689600000,
+        "start": 1735689600000,
+        "end": 1735689600000,
+        "qualifiedName": "reporting_consenso_01@LaboratorioA",
+        "participants": [
+          { "guid": "-101", "typeName": "User" },
+          { "guid": "-102", "typeName": "User" },
+          { "guid": "-103", "typeName": "User" }
+        ],
+        "resolvedBy": { "guid": "-101", "typeName": "User" },
+        "comments": " Reviewed and confirmed by Senior",
+        "result": "approved",
+        "action": { "guid": "-172", "typeName": "Action" }
+      }
+    }
+    
+  ]
+}
