@@ -1,48 +1,35 @@
-# RPCM Pipeline Validation
+# Thesis Project Overview
 
-This repository contains the validation of an experiment implementing the **Research Processes Curation Metamodel (RPCM)** through a **data pipeline**.  
+This repository contains my master’s thesis, which demonstrates the application of the **Research Processes Curation Metamodel (RPCM)**, a model designed to represent the complete lifecycle of data-driven projects. As part of this work, a [pipeline](./pipeline/) was implemented to transform metadata extracted from Kaggle projects into RPCM entities.
 
-The workflow focuses on assessing a Kaggle dataset, extracting metadata, and transforming it into RPCM entities, which are then integrated and validated within **Apache Atlas**.
+<figure style="width: 100%; text-align: center; margin: 0;">
+  <img src="images/metamodel.png" alt="Diagrama ejemplo" style="width: 100%; height: auto;">
+  <figcaption style="
+      font-family: inherit;  
+      font-size: 1em;        
+      font-style: italic;   
+      text-align: center;
+      margin-top: 0.5em;">
+    Research Processes Curation Metamodel <b>(RPCM)</b>
+  </figcaption>
+</figure>
 
-## 🎯 Objectives of the Experiment
+## Demo
 
-- Validate the RPCM metamodel  
-- Demonstrate the ability to structure research processes  
-- Verify the effectiveness of taxonomy queries  
-- Establish a replicable framework for future validations 
+If you would like to explore the pipeline implemented, you can access the Streamlit app here: https://letitia-app-mk5m8vps4krnqyxhljl9cw.streamlit.app/
 
-## 📌 Pipeline Workflow
+## How to execute
 
-1. **Data Quality Assessment**  
-   - Download the selected dataset from Kaggle.  
-   - Evaluate its structure, completeness, and potential quality issues.  
-
-2. **Metadata Extraction**  
-   - Extract metadata from Kaggle.  
-   - Consolidate the information into a single `metadata.json` file.  
-   - This unified file serves as the foundation for the RPCM transformation.  
-
-3. **Transformation to RPCM Entities**  
-   - Convert the consolidated JSON into RPCM-compliant entities.  
-   - Generate a structured output ready for ingestion into a metadata system.  
-
-4. **Taxonomy Queries**  
-   - Validate that RPCM enables a comprehensive exploration of research processes.  
-
-The **first three steps** of the pipeline were implemented using **Google Colab notebooks**, which are also included in this repository along with their respective documentation.
-
-
-## ⚙️ Environment Setup
+### ⚙️ Environment Setup
 
 The environment is built with **Docker** using an **Apache Atlas** container.  
-This repository includes an `atlas.yml` file that defines the Atlas image and mounts volumes with three JSON files:  
+The folder [rpcm-atlas](./rpcm-atlas) includes an `atlas.yml` file that defines the Atlas image and mounts volumes with three JSON files:  
 
-- `Entitydefs.json` → RPCM entity definitions ready for ingestion into Atlas.  
-- `graffiti_project.json` → Validation of the use case.  
-- `entities-bulk-atlas.json` → Result of the validation pipeline (included directly for convenience, but its creation is also documented in the **Extraction and Transformation Step** folder).  
+- `Entitydefs.json`: Json that contains RPCM entities definitions ready for ingestion into Atlas.  
+- `graffiti_project.json`: A JSON file containing RPCM instances of entities derived from the real use case.
+- `entities-bulk-atlas.json`: The output of the pipeline that consists of Kaggle metadta represented in RPCM.
 
-
-## 🚀 Start Atlas
+### Start Atlas
 
 Pull and start the Atlas container:
 
@@ -80,20 +67,12 @@ curl -u admin:admin -X POST -H "Content-Type: application/json" \
 http://localhost:21000/api/atlas/v2/entity/bulk
 ```
 
-## 🔍 Pipeline Visualization and Taxonomy Queries
+## 🔍 Queries
 
-Once the RPCM entities and instances have been ingested into **Apache Atlas**, you can explore and validate the research processes through **taxonomy queries**.  
+Once the RPCM entities and instances have been ingested into Apache Atlas, you can explore them through queries.
 
-These queries allow you to navigate and extract structured information directly from the RPCM entities stored in Atlas.  
 
-### Example Query
-
-- **List projects and their creators**
-```sql
-from Project select createdBy
+**Example - List projects and their creators:**
+```SQL
+FROM Project SELECT createdBy
 ```
-
-## 🔍 Pipeline Visualization
-
-If you would like to explore the pipeline interactively and see more Taxonomy Queries, you can access the Streamlit app here: https://letitia-app-mk5m8vps4krnqyxhljl9cw.streamlit.app/
-

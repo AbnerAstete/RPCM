@@ -1,110 +1,44 @@
 #  🚀 Kaggle metadata entities Transformation into RPCM entities Pipeline
 
-An integrated pipeline for data quality assessment and  metadata extraction from Kaggle projects. This notebook not only evaluates and cleans datasets but also transforms Kaggle Projects into RPCM-compatible entities ready for Apache Atlas ingestion.
+This pipeline automates the evaluation of data quality, extraction, and transformation of metadata from Kaggle projects into entities of the Research Processes Curation Metamodel (RPCM), ready to be ingested and explored in Apache Atlas.
 
 ## 📌 Pipeline Workflow
 
-1. **Data Quality Assessment**  
-   - Evaluate its structure, completeness, and potential quality issues.  
+The pipeline is organized into four main steps. The first three steps are integrated into the Pipeline notebook. In addition, they are available separately in the Data Quality Step and Extraction and Transformation Step folders in the repository to facilitate their execution and independent analysis.
 
-2. **Metadata Extraction**  
-   - Extract metadata from Kaggle Project.  
-   - Consolidate the information into a single JSON file.  
-   - This unified file serves as the foundation for the RPCM transformation.  
-
-3. **Transformation to RPCM Entities**  
-   - Convert the consolidated JSON into RPCM-compliant entities.  
-   - Generate a structured output ready for ingestion into a metadata system.  
+![workflow](/images/steps.jpg)
 
 
-## 📊 Data Quality Assessment
+**Step 1 – Data Quality Analysis:** Evaluate the reliability of the Kaggle user who created the datasets used in the project, as well as the condition and quality of the data. This includes detection of missing values, duplicates, and other integrity metrics.
 
-Following the approach proposed in the paper "The Five Facets of Data Quality Assessment" and comparing it with the types of datasets available on Kaggle, We following this adaptation for our case, focused on building a standardized data quality analysis framework:
-
-![Step1 Diagram](/images/step1.svg)
-
-### 🔍 Data Analysis Facets
-
-Source Facet:
-
-- Author reputation & activity metrics.
-- Dataset popularity (downloads, votes, notebooks).
-- Version history and traceability.
-- License and documentation quality.
-
-Data Facet Metrics:
-
-- Missing values per column.
-- Duplicate row detection.
-- Statistical distributions.
-- Outlier identification using IQR method.
-
-Automated Cleaning:
-
-- Missing values: Median imputation for numeric, row removal for categorical
-- Duplicates: Complete removal
-- Outliers: Quantile-based clipping (5th-95th percentiles)
-
-## 🕵️‍♂️ Source Facet Report
-
-The `dataset_reliability_report.json` provides a complete check to the Kaggle User:
-### What's Inside
-
-| Assessment Factor | Possible States | What It Evaluates |
-|-------------------|-----------------|-------------------|
-| **1. Author Info** | ✅ Available / ❌ Not available | Creator reputation, portfolio size, community impact |
-| **2. Publication Date** | ✅ Available / ⚠️ Missing | Temporal transparency, update history |
-| **3. License** | ✅ Clear license / ⚠️ Unknown license | Legal usage rights and restrictions |
-| **4. External Source** | ✅ Described / ⚠️ No description | Data origin and methodology documentation |
-| **5. Traceability** | ✅ Version history / ⚠️ No versions | Change tracking and data lineage |
-| **6. Description** | ✅ Complete / ⚠️ Basic | Title, subtitle, and documentation quality |
-| **7. Community Feedback** | ✅ High engagement / ⚠️ Low | Downloads, votes, and community adoption |
-
-
-## 📊 Data Facet Analysis 
-
-
-The `datasets_analysis.json` provides a complete health check to the CSV files:
-
-
-### What's Inside
-**File Basics**: Size, timestamps, and structure overview  
-**Schema Details**: Column names, data types, and dimensions  
-**Quality Metrics**: Missing values, duplicates, and completeness scores  
-**Statistical Profiles**: Descriptive stats for numeric columns, top values for categorical  
-**Sample Data**: Preview of actual values to verify content  
-
-### Key Quality Indicators
-- **Completeness Score** (0-100): Percentage of non-missing data
-- **Duplicate Detection**: Identical rows that need removal  
-- **Column Uniqueness**: How many distinct values per field
-- **Data Type Validation**: Proper numeric vs categorical classification
-
-## 🔍 Metadata Extraction 
-
-This step identify models, datasets, visualizations, and metrics used throughout the **Metadata Project**. It conducts **Log Mining** to parse execution outputs for performance data and confusion matrices. The pipeline extracts **Notebook Insights** including sections, models used, graphs generated, and data dependencies. Additionally, it enriches the metadata with technical details such as file sizes, creation dates, and encoding detection.
-
-![Step2 Diagram](/images/step2.png)
+**Step 2 – Metadata Extraction:**
+Extract metadata from the Kaggle project and structure it according to our Kaggle metamodel.
 
 
 
+![kaggle-representation](/images/kaggle-representation.jpg)  
+*Kaggle Metamodel.*
+
+**Step 3 – Transformation to RPCM Entities:** Applies a series of transformation rules to convert the Kaggle metamodel entities obtained in the previous step into RPCM entities, generating a set of project entities ready to be ingested into Apache Atlas.
+
+![metamodel-atlas](/images/metamodel-atlas.png)
+*RPCM adapted to Atlas.*
+
+**Step 4 – Integration and Validation:** The entities generated in the previous step are imported into Atlas and the content is explored.
 
 
-## Transformation to RPCM Entities
+## Outputs Pipeline
 
-This step transform a structured input dictionary (extracted metadata from Kaggle) into a collection of entities formatted to be ingested into the ATLAS metadata repository. The output is a **list of dictionaries**, each representing an ATLAS entity with assigned types, GUIDs. This bulk of entities is then ready to be ingested by ATLAS, enabling tracking and governance of workflows with provenance and lineage.
+The pipeline generates several files, reports, and visualizations that allow users to understand the quality of the data, the extracted metadata, and the generated RPCM entities.
 
-![Step3 Diagram](/images/step3.svg)
+📄 Quality reports: datasets_analysis.json,  dataset_reliability_report.json  
 
-### 🏗️ Research Components Mapped
-- User: Kaggle contributor profile
-- Project: Notebook title and keywords
-- Experiment: Purpose of the project
-- Stage: Execution Phase
-- Iteration: Version or run instance
-- Action: Creation of the Notebook
-- UsedData: Datasets, models, charts, logs, notebook
-- Consensus: Validation and results
+🗂 Extracted metadata: kernel-metadata.json, insights-notebook.json, log_analysis.json  
+
+📦 RPCM entities: entities-bulk-atlas.json
+
+📊 Visualizations: histograms, boxplots.
+
 
 ## ⚡ Quick Start
 
@@ -118,11 +52,13 @@ os.environ['KAGGLE_KEY'] = "your_api_key"
 Select the Project:
 ```
 kernel_refs = [
-    "your-project/notebook-name/",
+    "kaggle-user/project-name/",
 ]
 ```
 
-## 📁 Project Structure
+### 📁 Project Structure
+
+When you have finished executing all the cells, you will have generated a folder structure similar to this:
 
 ```
 project/
@@ -149,34 +85,34 @@ project/
 │   │   └── entities/
 │   │       ├── entities-kaggle.json
 │   │       └── entities-bulk-atlas.json
-
 ```
 
 
-## 🧩 Atlas Integration
-- Bulk Import Ready: JSON format compatible with Apache Atlas
-- Entity Mapping: Users, projects, datasets, models, metrics
-- Execution Report: The pipeline_execution_report.json provides a traceable summary of the generated entities and extra insights on the transformation process, ensuring transparency and auditability.
+### 🛠️ Dependencias
+Since the pipeline is implemented on a notebook, you can import it into Google Colab if you wish, so you won't have any problems with dependencies. But if you want to run it locally, the dependencies used were: 
 
-## 📊 Visualizations
-- Histograms with statistical annotations
-- Boxplots with outlier detection counts
+- Standard Python: os, re, zipfile, json, subprocess, datetime, uuid, hashlib, base64, math, collections, pathlib
 
-## 🛠️ Dependencies
-- python
-- kaggle
-- pandas, numpy
-- matplotlib, seaborn
-- scikit-learn
-- pathlib
+- Pandas: pandas
+- NumPy: numpy
+- Matplotlib: matplotlib
+- Seaborn: seaborn
+- Scikit-learn: scikit-learn (for SimpleImputer)
+- Chardet: chardet (encoding detection)
+- Nbformat: nbformat (for handling notebooks)
+- Kaggle API: kaggle (KaggleApi)
 
-## 💡 Tips
-
+### 💡 Tips
 - Adjust WEIGHTS dictionary to prioritize scoring dimensions
 - Modify ALERT_THRESHOLD for stricter quality control
 - Customize quantile parameters for outlier handling
 - Extend metadata mapping for enterprise-specific governance
 
 
+## Step-by-step guide to the pipeline
+
+For those who want to see the internal logic in detail.
+
+![architecture](/images/architecture.png)
 
 
