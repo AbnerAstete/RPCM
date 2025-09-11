@@ -14,8 +14,6 @@ The pipeline is organized into four main steps. The first three steps are integr
 **Step 2 – Metadata Extraction:**
 Extract metadata from the Kaggle project and structure it according to our Kaggle metamodel.
 
-
-
 ![kaggle-representation](/images/kaggle-representation.jpg)  
 *Kaggle Metamodel.*
 
@@ -24,20 +22,25 @@ Extract metadata from the Kaggle project and structure it according to our Kaggl
 ![metamodel-atlas](/images/metamodel-atlas.png)
 *RPCM adapted to Atlas.*
 
-**Step 4 – Integration and Validation:** The entities generated in the previous step are imported into Atlas and the content is explored.
+**Step 4 – Integration and Validation:** The entities generated in the previous step are imported into Atlas and the content is explored. Once the RPCM entities and instances have been ingested into Apache Atlas, you can explore them through queries.
 
+
+**List projects and their creators:**
+```SQL
+FROM Project SELECT createdBy
+```
 
 ## Outputs Pipeline
 
 The pipeline generates several files, reports, and visualizations that allow users to understand the quality of the data, the extracted metadata, and the generated RPCM entities.
 
-📄 Quality reports: datasets_analysis.json,  dataset_reliability_report.json  
+- Quality reports: datasets_analysis.json,  dataset_reliability_report.json  
 
-🗂 Extracted metadata: kernel-metadata.json, insights-notebook.json, log_analysis.json  
+- Extracted metadata: kernel-metadata.json, insights-notebook.json, log_analysis.json  
 
-📦 RPCM entities: entities-bulk-atlas.json
+- RPCM entities: entities-bulk-atlas.json
 
-📊 Visualizations: histograms, boxplots.
+- Visualizations: histograms, boxplots.
 
 
 ## ⚡ Quick Start

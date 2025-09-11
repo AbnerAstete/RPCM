@@ -1,18 +1,13 @@
 # Thesis Project Overview
 
-This repository contains my master’s thesis, which demonstrates the application of the **Research Processes Curation Metamodel (RPCM)**, a model designed to represent the complete lifecycle of data-driven projects. As part of this work, a [pipeline](./pipeline/) was implemented to transform metadata extracted from Kaggle projects into RPCM entities.
+This repository contains my master’s thesis, which demonstrates the application of the **Research Processes Curation Metamodel (RPCM)**, a model designed to represent the complete lifecycle of data-driven projects. 
 
-<figure style="width: 100%; text-align: center; margin: 0;">
-  <img src="images/metamodel.png" alt="Diagrama ejemplo" style="width: 100%; height: auto;">
-  <figcaption style="
-      font-family: inherit;  
-      font-size: 1em;        
-      font-style: italic;   
-      text-align: center;
-      margin-top: 0.5em;">
-    Research Processes Curation Metamodel <b>(RPCM)</b>
-  </figcaption>
-</figure>
+RPCM is a conceptual and operational metamodel that integrates technical artifacts (data, code, models, results) with socio-organizational elements (users, roles, decisions, and consensus). Its objective is to enable the complete curation, traceability, and reproducibility of data-driven projects. The [pipeline](./pipeline/) implemented in this repository operationalizes RPCM, automatically transforming project metadata into model entities and tracing the entire experimental cycle, from data acquisition to results validation.
+
+![pipeline](/images/pipeline.png)
+*Pipeline Workflow.*
+
+
 
 ## Demo
 
@@ -67,12 +62,4 @@ curl -u admin:admin -X POST -H "Content-Type: application/json" \
 http://localhost:21000/api/atlas/v2/entity/bulk
 ```
 
-## 🔍 Queries
 
-Once the RPCM entities and instances have been ingested into Apache Atlas, you can explore them through queries.
-
-
-**Example - List projects and their creators:**
-```SQL
-FROM Project SELECT createdBy
-```
