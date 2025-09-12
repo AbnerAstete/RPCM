@@ -6,7 +6,7 @@ This pipeline automates the evaluation of data quality, extraction, and transfor
 
 The pipeline is organized into four main steps. The first three steps are integrated into the Pipeline notebook. In addition, they are available separately in the Data Quality Step and Extraction and Transformation Step folders in the repository to facilitate their execution and independent analysis.
 
-![workflow](/images/steps.jpg)
+![workflow](/assets/steps.jpg)
 
 
 **Step 1 – Data Quality Analysis:** Evaluate the reliability of the Kaggle user who created the datasets used in the project, as well as the condition and quality of the data. This includes detection of missing values, duplicates, and other integrity metrics.
@@ -14,12 +14,12 @@ The pipeline is organized into four main steps. The first three steps are integr
 **Step 2 – Metadata Extraction:**
 Extract metadata from the Kaggle project and structure it according to our Kaggle metamodel.
 
-![kaggle-representation](/images/kaggle-representation.jpg)  
+![kaggle-representation](/assets/kaggle-representation.jpg)  
 *Kaggle Metamodel.*
 
 **Step 3 – Transformation to RPCM Entities:** Applies a series of transformation rules to convert the Kaggle metamodel entities obtained in the previous step into RPCM entities, generating a set of project entities ready to be ingested into Apache Atlas.
 
-![metamodel-atlas](/images/metamodel-atlas.png)
+![metamodel-atlas](/assets/metamodel-atlas.png)
 *RPCM adapted to Atlas.*
 
 **Step 4 – Integration and Validation:** The entities generated in the previous step are imported into Atlas and the content is explored. Once the RPCM entities and instances have been ingested into Apache Atlas, you can explore them through queries.
@@ -116,6 +116,6 @@ Since the pipeline is implemented on a notebook, you can import it into Google C
 
 For those who want to see the internal logic in detail.
 
-![architecture](/images/architecture.png)
+![architecture](/assets/architecture.png)
 
 
