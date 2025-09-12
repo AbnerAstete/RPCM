@@ -2,7 +2,7 @@
 
 This repository contains my master’s thesis, which demonstrates the application of the **Research Processes Curation Metamodel (RPCM)**, a model designed to represent the complete lifecycle of data-driven projects. 
 
-RPCM is a conceptual and operational metamodel that integrates technical artifacts (data, code, models, results) with socio-organizational elements (users, roles, decisions, and consensus). Its objective is to enable the complete curation, traceability, and reproducibility of data-driven projects. The [pipeline](./pipeline/) implemented in this repository operationalizes RPCM, automatically transforming project metadata into model entities and tracing the entire experimental cycle, from data acquisition to results validation.
+RPCM is a conceptual and operational metamodel that integrates technical artifacts (data, code, models, results) with socio-organizational elements (users, roles, decisions, and consensus). Its objective is to enable the complete curation, traceability, and reproducibility of data-driven projects. The [Pipeline](./pipeline/) implemented in this repository operationalizes RPCM, automatically transforming project metadata into model entities and tracing the entire experimental cycle, from data acquisition to results validation.
 
 ![pipeline](/images/pipeline.png)
 *Pipeline Workflow.*
@@ -11,7 +11,7 @@ RPCM is a conceptual and operational metamodel that integrates technical artifac
 
 ## Demo
 
-If you would like to explore the pipeline implemented, you can access the Streamlit app here: https://letitia-app-mk5m8vps4krnqyxhljl9cw.streamlit.app/
+If you would like to explore the pipeline implemented, you can access the Streamlit app here: https://rpcm-demo-pipeline.streamlit.app/
 
 ## How to execute
 
