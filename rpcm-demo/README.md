@@ -1,32 +1,33 @@
-# Demo en Streamlit
+# Streamlit Demo
 
-Este proyecto contiene una demo de la pipeline implementada, esta demo esta hecha con [Streamlit](https://streamlit.io/) que puede ejecutarse de manera local.  
+This project contains a demo of the implemented pipeline, this demo was built with [Streamlit](https://streamlit.io/), which can be run locally.  
 
-## 
 
-1. **Entrar a la carpeta de la demo**  
+##  ⚡️ How to run the demo locally
+
+1. **Go to the demo folder**  
    ```bash
-   cd nombre_de_la_carpeta
+   cd demo_folder_name
     ```
-2. **Crear un entorno virtual con venv**
+2. **Create a virtual environment with venv**
     ```
     python -m venv venv
     ```
-3. **Activar el entorno virtual**
+3. **Activate the virtual environment**
 
-- En Linux / MacOS:
+- On Linux / MacOS:
     ```
     source venv/bin/activate
     ```
-- En Windows (PowerShell):
+- On Windows (PowerShell):
     ```
     venv\Scripts\Activate
     ```
-4. **Instalar los requerimientos**
+4. **Install the requirements**
     ```
     pip install -r requirements.txt
     ```
-5. **Ejecutar la app con Streamlit**
+5. **Run the app with Streamlit**
     ```
     streamlit run app.py
     ```
