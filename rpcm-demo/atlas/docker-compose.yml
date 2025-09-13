@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  apache-atlas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache-atlas-with-proxy
+    ports:
+      - "21000:21000"  # Atlas web UI (direct access)
+      - "8502:8502"    # Proxy access
+    environment:
+      - ATLAS_OPTS=-Xmx2048m
+    volumes:
+      # Optional: persist Atlas data
+      - atlas_data:/opt/apache-atlas-2.1.0/data
+      - atlas_logs:/opt/apache-atlas-2.1.0/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:21000/api/atlas/admin/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    restart: unless-stopped
+    networks:
+      - atlas-network
+
+volumes:
+  atlas_data:
+    driver: local
+  atlas_logs:
+    driver: local
+
+networks:
+  atlas-network:
+    driver: bridge

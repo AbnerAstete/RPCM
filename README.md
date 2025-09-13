@@ -1,8 +1,24 @@
-# Thesis Project Overview
+# Thesis Project Overview - Research Processes Curation Metamodel (RPCM)
 
-This repository contains my master’s thesis, which demonstrates the application of the **Research Processes Curation Metamodel (RPCM)**, a model designed to represent the complete lifecycle of data-driven projects. 
+RPCM is a metamodel that provides concepts to represent both the technical artifacts (data, code, models, results) and the organizational elements (users, roles, decisions, consensus) involved in a data-driven research project. With RPCM, users can search, curate, trace, and reproduce research processes.
 
-RPCM is a conceptual and operational metamodel that integrates technical artifacts (data, code, models, results) with organizational elements (users, roles, decisions, and consensus). Its objective is to enable the complete curation, traceability, and reproducibility of data-driven projects. The pipeline implemented in this [repository](/rpcm-pipeline/) operationalizes RPCM, automatically transforming project metadata into model entities and tracing the entire experimental cycle, from data acquisition to results validation.
+I developed RPCM in 2025 during my six-month mandatory master’s internship at the LIRIS laboratory.
+
+### Usage Example
+
+The repository includes a pipeline example demonstrating how to extract data from a Kaggle project and transform it into RPCM concepts. In this example, a Kaggle project is assumed to implicitly and explicitly contain all the elements of a typical data-driven research project:
+
+- Hypothesis definition
+- Experimentation as code
+- Artifacts (datasets, models, etc.)
+- Users
+
+Given a target Kaggle project, the example pipeline automatically extracts the project’s metadata and transforms it into RPCM entities to trace the experimental cycle.
+
+
+
+
+
 
 ![pipeline](/assets/pipeline.png)
 *Pipeline Workflow.*
@@ -25,6 +41,12 @@ The folder [rpcm-atlas](./rpcm-atlas) includes an `atlas.yml` file that defines 
 - `entities-bulk-atlas.json`: The output of the pipeline that consists of Kaggle metadta represented in RPCM.
 
 ### Start Atlas
+
+Go to the atlas folder
+
+```bash
+cd rpcm-atlas
+```
 
 Pull and start the Atlas container:
 

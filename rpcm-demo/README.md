@@ -5,9 +5,28 @@ This project contains a demo of the implemented pipeline, this demo was built wi
 
 ##  ⚡️ How to run the demo locally
 
+### Run Apache Atlas
+
 1. **Go to the demo folder**  
    ```bash
-   cd demo_folder_name
+   cd rpcm-demo/atlas
+    ```
+2. **Up the container**
+    ```
+    docker-compose up -d
+    ```
+
+Once the container is up and running, you can check it by going to: http://localhost:8502⁠.
+
+The credentials are:
+
+- Username: admin
+- Password: admin
+
+### Run Streamlit
+1. **Go to the demo folder**  
+   ```bash
+   cd rpcm-demo
     ```
 2. **Create a virtual environment with venv**
     ```

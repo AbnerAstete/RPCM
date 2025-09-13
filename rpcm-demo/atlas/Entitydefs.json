@@ -1,0 +1,220 @@
+{
+  "enumDefs": [
+    {
+      "name": "ProcessStatus",
+      "elementDefs": [
+        { "value": "Active", "ordinal": 0 },
+        { "value": "Validated", "ordinal": 1 },
+        { "value": "Completed", "ordinal": 2 }
+      ],
+      "typeVersion": "1.0"
+    },
+    {
+      "name": "consensusResultEnum",
+      "elementDefs": [
+        { "value": "approved", "ordinal": 1 },
+        { "value": "rejected", "ordinal": 2 }
+      ],
+      "typeVersion": "1.0"
+    }
+  ],
+  "entityDefs": [
+    {
+      "name": "NamedEntity",
+      "superTypes": ["Referenceable"],
+      "attributeDefs": [
+        { "name": "description", "typeName": "string", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Project",
+      "superTypes": ["NamedEntity"],
+      "attributeDefs": [
+        { "name": "location", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "experiments", "typeName": "array<Experiment>", "cardinality": "SET", "isOptional": true },
+        { "name": "keywords", "typeName": "array<string>", "cardinality": "SET", "isOptional": true },
+        { "name": "createdBy", "typeName": "User", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "startDate", "typeName": "date", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "endDate", "typeName": "date", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Experiment",
+      "superTypes": ["NamedEntity"],
+      "attributeDefs": [
+        { "name": "project", "typeName": "Project", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "stages", "typeName": "array<Stage>", "cardinality": "SET", "isOptional": true },
+        { "name": "workgroup", "typeName": "array<Workgroup>", "cardinality": "SET", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Workgroup",
+      "superTypes": ["NamedEntity"],
+      "attributeDefs": [
+        { "name": "experiment", "typeName": "Experiment", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "users", "typeName": "array<User>", "cardinality": "SET", "isOptional": true }
+      ]
+    },
+    {
+      "name": "User",
+      "superTypes": ["NamedEntity"],
+      "attributeDefs": [
+        { "name": "name", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "email", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "role", "typeName": "string", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "ProcessComponent",
+      "superTypes": ["NamedEntity"],
+      "attributeDefs": [
+        { "name": "timestamp", "typeName": "date", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "start", "typeName": "date", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "end", "typeName": "date", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Stage",
+      "superTypes": ["ProcessComponent"],
+      "attributeDefs": [
+        { "name": "iterations", "typeName": "array<Iteration>", "cardinality": "SET", "isOptional": true },
+        { "name": "status", "typeName": "ProcessStatus", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "experiment", "typeName": "Experiment", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Iteration",
+      "superTypes": ["ProcessComponent"],
+      "attributeDefs": [
+        { "name": "stage", "typeName": "Stage", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "Action",
+      "superTypes": ["ProcessComponent","Process"],
+      "attributeDefs": [
+        { "name": "status", "typeName": "ProcessStatus", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "madeBy", "typeName": "array<User>", "cardinality": "SET", "isOptional": true },
+        { "name": "iteration", "typeName": "Iteration", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "inputData", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "outputData", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+
+
+        { "name": "inputs", "typeName": "array<UsedData>", "isOptional": true, "cardinality": "SET" },
+        { "name": "outputs", "typeName": "array<UsedData>", "isOptional": true, "cardinality": "SET" }
+      ]
+    },
+    {
+      "name": "Consensus",
+      "superTypes": ["ProcessComponent"],
+      "attributeDefs": [
+        { "name": "typeConsensus", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "agreementLevel", "typeName": "int", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "participants", "typeName": "array<User>", "cardinality": "SET", "isOptional": true },
+        { "name": "resolvedBy", "typeName": "User", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "result", "typeName": "consensusResultEnum", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "comments", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "action", "typeName": "Action", "cardinality": "SINGLE", "isOptional": true }
+      ]
+    },
+    {
+      "name": "UsedData",
+      "superTypes": ["DataSet"],
+      "attributeDefs": [
+        { "name": "description", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "producer", "typeName": "User", "cardinality": "SINGLE", "isOptional": false },
+        { "name": "document", "typeName": "string", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "format", "typeName": "string", "cardinality": "SINGLE", "isOptional": false },
+        { "name": "size", "typeName": "int", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "storageLocation", "typeName": "fs_path", "cardinality": "SINGLE", "isOptional": true },
+        { "name": "previousVersion", "typeName": "UsedData", "cardinality": "SINGLE", "isOptional": true }
+      ],
+      "relationshipAttributeDefs": [
+        {
+          "name": "inputOfActions",
+          "typeName": "Action",
+          "cardinality": "SET",
+          "isOptional": true,
+          "relationshipTypeName": "action_input_data"
+        },
+        {
+          "name": "outputOfActions",
+          "typeName": "Action",
+          "cardinality": "SET",
+          "isOptional": true,
+          "relationshipTypeName": "action_output_data"
+        }
+      ]
+    }
+  ],
+  "relationshipDefs": [
+    {
+      "name": "project_experiment",
+      "typeVersion": "1.0",
+      "relationshipCategory": "COMPOSITION",
+      "endDef1": {
+        "type": "Project",
+        "name": "experiments",
+        "cardinality": "SET",
+        "isContainer": true
+      },
+      "endDef2": {
+        "type": "Experiment",
+        "name": "project",
+        "cardinality": "SINGLE",
+        "isContainer": false
+      }
+    },
+    {
+      "name": "experiment_stage",
+      "typeVersion": "1.0",
+      "relationshipCategory": "COMPOSITION",
+      "endDef1": {
+        "type": "Experiment",
+        "name": "stages",
+        "cardinality": "SET",
+        "isContainer": true
+      },
+      "endDef2": {
+        "type": "Stage",
+        "name": "experiment",
+        "cardinality": "SINGLE",
+        "isContainer": false
+      }
+    },
+    {
+      "name": "stage_iteration",
+      "typeVersion": "1.0",
+      "relationshipCategory": "COMPOSITION",
+      "endDef1": {
+        "type": "Stage",
+        "name": "iterations",
+        "cardinality": "SET",
+        "isContainer": true
+      },
+      "endDef2": {
+        "type": "Iteration",
+        "name": "stage",
+        "cardinality": "SINGLE",
+        "isContainer": false
+      }
+    },
+    {
+      "name": "iteration_action",
+      "typeVersion": "1.0",
+      "relationshipCategory": "COMPOSITION",
+      "endDef1": {
+        "type": "Iteration",
+        "name": "actions",
+        "cardinality": "SET",
+        "isContainer": true
+      },
+      "endDef2": {
+        "type": "Action",
+        "name": "iteration",
+        "cardinality": "SINGLE",
+        "isContainer": false
+      }
+    }
+  ]
+}
