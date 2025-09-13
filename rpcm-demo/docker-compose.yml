@@ -3,7 +3,7 @@ version: '3.8'
 services:
   apache-atlas:
     build:
-      context: .
+      context: ./atlas
       dockerfile: Dockerfile
     container_name: apache-atlas-with-proxy
     ports:
@@ -23,7 +23,28 @@ services:
       start_period: 120s
     restart: unless-stopped
     networks:
-      - atlas-network
+      - app-network
+
+  streamlit-app:
+    build:
+      context: ./streamlit
+      dockerfile: Dockerfile
+    container_name: streamlit-app
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Variables para conectar con Atlas si es necesario
+      - ATLAS_URL=http://apache-atlas:21000
+      - ATLAS_PROXY_URL=http://apache-atlas:8502
+    volumes:
+      - ./streamlit:/app
+      - /app/__pycache__
+    depends_on:
+      - apache-atlas
+    networks:
+      - app-network
+    restart: unless-stopped
 
 volumes:
   atlas_data:
@@ -32,5 +53,5 @@ volumes:
     driver: local
 
 networks:
-  atlas-network:
+  app-network:
     driver: bridge
