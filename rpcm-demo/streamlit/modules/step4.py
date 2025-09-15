@@ -1,8 +1,10 @@
 import streamlit as st
 import streamlit.components.v1 as components
-import requests
-import json
-import time
+import os
+import subprocess
+import socket
+
+
 
 def show(proyecto):
     """Step 4: Taxonomy Queries"""
@@ -27,9 +29,11 @@ def show_atlas_interface():
     st.subheader("Atlas Web Interface")
     st.markdown("Explore the full Atlas interface with all imported entities:")
     
-    # URL del proxy
-    proxy_url = "http://localhost:8502"
-
+    # Usar la IP pasada desde el host
+    host_ip = os.getenv('HOST_IP', 'localhost')
+    proxy_url = f"http://{host_ip}:8502"
+    print(f"Using proxy URL: {proxy_url}")
+    
     # Crear el iframe usando el proxy
     components.iframe(
         src=proxy_url,

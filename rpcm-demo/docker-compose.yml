@@ -32,9 +32,9 @@ services:
       - "8501:8501"
     environment:
       - PYTHONUNBUFFERED=1
-      # Variables para conectar con Atlas si es necesario
       - ATLAS_URL=http://apache-atlas:21000
       - ATLAS_PROXY_URL=http://apache-atlas:8502
+      - HOST_IP=${HOST_IP}
     volumes:
       - ./streamlit:/app
       - /app/pycache
