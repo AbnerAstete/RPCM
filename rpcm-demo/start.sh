@@ -1,7 +1,7 @@
 #!/bin/bash
 # start.sh - Hybrid script for Codespaces and local development
 
-echo "🚀 Starting environment setup..."
+echo "Starting environment setup..."
 
 # First try Codespaces-specific configuration
 if [ -n "$CODESPACE_NAME" ] && [ -n "$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN" ]; then
@@ -15,9 +15,9 @@ if [ -n "$CODESPACE_NAME" ] && [ -n "$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN" 
     CODESPACE_MODE=true
     
 else
-    echo "💻 Using automatic IP detection (your original method)"
+    echo "Using automatic IP detection"
     
-    # Your original logic - works locally and in Codespaces without variables
+    # logic - works locally and in Codespaces without variables
     if command -v python3 &> /dev/null; then
         # Use Python if available
         HOST_IP=$(python3 -c "
@@ -46,7 +46,7 @@ print(get_local_ip())
         fi
     fi
     
-    echo "🌐 Detected HOST_IP: $HOST_IP"
+    echo "Detected HOST_IP: $HOST_IP"
     
     # Detect if we are in Codespaces even without the variables
     if [ -n "$CODESPACES" ] || [[ "$PWD" == *"codespace"* ]] || [[ "$PWD" == *"/workspaces/"* ]]; then
@@ -59,28 +59,28 @@ fi
 
 # Create .env file for Docker Compose
 echo "HOST_IP=$HOST_IP" > .env
-echo "📝 .env file created:"
+echo ".env file created:"
 cat .env
 
 echo ""
-echo "🎯 Access URLs:"
+echo "Access URLs:"
 if [ "$CODESPACE_MODE" = true ] && [ -n "$CODESPACE_NAME" ]; then
-    echo "   📊 Streamlit: https://${CODESPACE_NAME}-8501.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-    echo "   🔗 Atlas (direct): https://${CODESPACE_NAME}-21000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-    echo "   🔀 Atlas (proxy): ${HOST_IP}"
+    echo " Streamlit: https://${CODESPACE_NAME}-8501.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+    echo " Atlas (direct): https://${CODESPACE_NAME}-21000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+    echo " Atlas (proxy): ${HOST_IP}"
 elif [ "$CODESPACE_MODE" = true ]; then
-    echo "   📊 Streamlit: Look for port 8501 in the Codespaces 'Ports' tab"
-    echo "   🔗 Atlas (direct): Look for port 21000 in the Codespaces 'Ports' tab"
-    echo "   🔀 Atlas (proxy): Look for port 8502 in the Codespaces 'Ports' tab"
-    echo "   💡 Or use: http://${HOST_IP}:8502 (if IP detection works)"
+    echo " Streamlit: Look for port 8501 in the Codespaces 'Ports' tab"
+    echo " Atlas (direct): Look for port 21000 in the Codespaces 'Ports' tab"
+    echo " Atlas (proxy): Look for port 8502 in the Codespaces 'Ports' tab"
+    echo " Or use: http://${HOST_IP}:8502 (if IP detection works)"
 else
-    echo "   📊 Streamlit: http://${HOST_IP}:8501"
-    echo "   🔗 Atlas (direct): http://${HOST_IP}:21000"
-    echo "   🔀 Atlas (proxy): http://${HOST_IP}:8502"
+    echo " Streamlit: http://${HOST_IP}:8501"
+    echo " Atlas (direct): http://${HOST_IP}:21000"
+    echo " Atlas (proxy): http://${HOST_IP}:8502"
 fi
 
 echo ""
-echo "🐳 Starting Docker Compose..."
+echo "Starting Docker Compose..."
 
 # Export the variable and run docker-compose
 export HOST_IP
