@@ -7,11 +7,11 @@ This folder contains a demo of the implemented pipeline.
 
 1. **Go to the demo folder**  
    ```bash
-   cd rpcm-demo/atlas
+   cd rpcm-demo/
     ```
-2. **Up the containers**
+2. **Start the demo**
     ```
-    docker-compose up --build
+        ./start.sh  
     ```
 
 The Atlas credentials are:

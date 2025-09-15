@@ -25,22 +25,58 @@ def show(proyecto):
         show_interactive_query_builder(proyecto)
 
 def show_atlas_interface():
-    """Muestra la interfaz de Atlas embebida"""
     st.subheader("Atlas Web Interface")
     st.markdown("Explore the full Atlas interface with all imported entities:")
     
-    # Usar la IP pasada desde el host
+    # Usar la IP/URL pasada desde el host
     host_ip = os.getenv('HOST_IP', 'localhost')
-    proxy_url = f"http://{host_ip}:8502"
+    
+    # Determinar si HOST_IP ya incluye protocolo y puerto
+    if host_ip.startswith(('http://', 'https://')):
+        # HOST_IP ya es una URL completa (caso Codespaces)
+        proxy_url = host_ip
+    else:
+        # HOST_IP es solo una IP (caso local)
+        proxy_url = f"http://{host_ip}:8502"
+    
     print(f"Using proxy URL: {proxy_url}")
     
+    # # Mostrar información de debugging
+    # with st.expander("🔧 Debug Info"):
+    #     st.write(f"HOST_IP: `{host_ip}`")
+    #     st.write(f"Proxy URL: `{proxy_url}`")
+        
+    #     # Detectar entorno
+    #     if os.getenv('CODESPACE_NAME'):
+    #         st.write("Entorno: GitHub Codespaces")
+    #         st.write(f"Codespace: `{os.getenv('CODESPACE_NAME')}`")
+    #     else:
+    #         st.write("💻 Entorno: Desarrollo local")
+    
     # Crear el iframe usando el proxy
-    components.iframe(
-        src=proxy_url,
-        width=1400,
-        height=800,
-        scrolling=True
-    )
+    try:
+        components.iframe(
+            src=proxy_url,
+            width=1400,
+            height=800,
+            scrolling=True
+        )
+
+    except Exception as e:
+        st.error(f"Error loading Atlas interface: {e}")
+        st.markdown(f"""
+        **Alternatives to access Atlas:**
+        
+        1. [Open Atlas in a new window]({proxy_url})
+        2. Direct URL: `{proxy_url}`
+        
+        **If the iframe does not work:**
+        - In Codespaces: Go to the "Ports" tab and look for port 8502
+        - Make sure the Atlas container is running
+        """)
+        if st.button("Open Atlas in a new window"):
+            st.markdown(f'<meta http-equiv="refresh" content="0; url={proxy_url}">', 
+                    unsafe_allow_html=True)
 
 def show_interactive_query_builder(proyecto):
     """Constructor interactivo con opciones calculadas"""
