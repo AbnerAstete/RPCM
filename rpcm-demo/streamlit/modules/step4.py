@@ -28,29 +28,43 @@ def show_atlas_interface():
     st.subheader("Atlas Web Interface")
     st.markdown("Explore the full Atlas interface with all imported entities:")
 
-    # Use the IP/URL passed from the host
+    # Detect host environment
     host_ip = os.getenv('HOST_IP', 'localhost')
     
-    # Determinar si HOST_IP ya incluye protocolo y puerto
+    # Determine proxy URL
     if host_ip.startswith(('http://', 'https://')):
-        # HOST_IP is now a complete URL (Codespaces case)
+        # HOST_IP is a complete URL (Codespaces case)
         proxy_url = host_ip
+        env_message = "Detected Codespace environment: using Option 3 (CODESPACE_NAME) automatically."
     else:
         # HOST_IP is an IP (local case)
         proxy_url = f"http://{host_ip}:8502"
-    
+        env_message = ("Running locally: using Option 2 (Machine IP address) by default, "
+                       "which is similar to localhost but accessible from other devices on the same network.")
+
     print(f"Using proxy URL: {proxy_url}")
 
+    # Show environment info
+    st.info(
+        f"Depending on where you are running Atlas, there are three main ways to access the web interface:\n\n"
+        f"1. **localhost** – accessible only from this machine.\n"
+        f"2. **Machine IP address** – accessible from other devices on the same network.\n"
+        f"3. **CODESPACE_NAME** – accessible via the public URL provided by GitHub Codespaces.\n\n"
+        f"{env_message}"
+    )
+    
+    # Show login and link
     st.markdown(
-    f"""
-    **Username:** `admin`  
-    **Password:** `admin`
+        f"""
+        **Username:** `admin`  
+        **Password:** `admin`
 
-    <a href="{proxy_url}" target="_blank">🔗 Open Atlas in a new window</a>  
-    """,
-    unsafe_allow_html=True
-)
+        <a href="{proxy_url}" target="_blank">🔗 Open Atlas in a new window</a>  
+        """,
+        unsafe_allow_html=True
+    )
 
+    # Embed Atlas in iframe
     components.iframe(
         src=proxy_url,
         width=1400,
@@ -288,7 +302,7 @@ def build_interactive_query(category, options, proyecto):
     col1, col2 = st.columns(2)
     
     with col1:
-        # Selector de filtro
+        # Filter selector
         filter_option = st.selectbox(
             "Filter by:",
             list(options['filters'].keys()),
@@ -299,7 +313,7 @@ def build_interactive_query(category, options, proyecto):
         st.caption(filter_info['description'])
     
     with col2:
-        # Selector de campos
+        # Field selector
         field_option = st.selectbox(
             "Show fields:",
             list(options['fields'].keys()),
@@ -308,21 +322,28 @@ def build_interactive_query(category, options, proyecto):
         
         selected_fields = options['fields'][field_option]
     
-    # Construir la query
+    # Build the query
     entity = options['entity']
     filter_part = options['filters'][filter_option]['query_part']
     fields_part = ", ".join(selected_fields)
     
+    # To display the queries vertically
     if filter_part:
-        query = f"FROM {entity} {filter_part} SELECT {fields_part}"
+        query_display = f"SELECT {fields_part}\nFROM {entity}\n{filter_part}"
     else:
-        query = f"FROM {entity} SELECT {fields_part}"
+        query_display = f"SELECT {fields_part}\nFROM {entity}"
     
-    st.subheader("Execute DSL Query")
-    st.code(query, language="sql")
-
+    st.subheader("DSL Query (visual)")
+    st.code(query_display, language="sql")
+    
+    # To send to the API
+    if filter_part:
+        query_api = f"FROM {entity} {filter_part} SELECT {fields_part}"
+    else:
+        query_api = f"FROM {entity} SELECT {fields_part}"
+    
     if st.button("Run Query"):
-        results = execute_atlas_query(query)
+        results = execute_atlas_query(query_api)
         
         st.subheader("Query Results")
         
@@ -331,17 +352,19 @@ def build_interactive_query(category, options, proyecto):
             if "details" in results:
                 st.text(results["details"])
         else:
-            # Mostrar respuesta en JSON o tabla
+            # Show response in JSON 
             if "entities" in results:
                 st.json(results["entities"])
             else:
                 st.json(results)
 
+
+
     
 def execute_atlas_query(query):
     """Execute the DSL query against the Apache Atlas API"""
     
-    # Atlas URL (you can use the same host_ip as before)
+    # Atlas URL 
     host_ip = os.getenv('HOST_IP', 'localhost')
     atlas_url = f"http://{host_ip}:21000/api/atlas/v2/search/dsl"
     
